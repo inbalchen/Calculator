@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes,Route,BrowserRouter} from "react-router-dom";
+import Calculator from "./components/Calculator/Calculator";
+import Login from "./components/Login";
+import History from "./components/History";
+import PrivateRoutes from "./PrivateRoutes";
+import NotFound from "./components/NotFound";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />}  />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/" element={<Calculator />} />
+          <Route path="/history" element={<History />} />
+        </Route>
+        <Route path="*" element={<NotFound />}  />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
